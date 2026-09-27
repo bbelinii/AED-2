@@ -16,3 +16,32 @@ public class HeapBase1 {
         }
     }
 }
+
+static void heapify(int[] vetor, int tamanho, int i) {
+
+    int maior = i;
+
+    int esquerda = 2 * i + 1;
+    int direita  = 2 * i + 2;
+
+    if (esquerda < tamanho &&
+        vetor[esquerda] > vetor[maior]) {
+
+        maior = esquerda;
+    }
+
+    if (direita < tamanho &&
+        vetor[direita] > vetor[maior]) {
+
+        maior = direita;
+    }
+
+    if (maior != i) {
+
+        int temp = vetor[i];
+        vetor[i] = vetor[maior];
+        vetor[maior] = temp;
+
+        heapify(vetor, tamanho, maior);
+    }
+}
