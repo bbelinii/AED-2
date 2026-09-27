@@ -39,3 +39,64 @@ public class QuickContadores {
         int t = v[a]; v[a] = v[b]; v[b] = t;
     }
 }
+----------------------------------------
+public class QuickSort {
+
+    public static void quickSort(int[] vetor, int inicio, int fim) {
+
+        // Só entra se existir pelo menos 2 elementos no intervalo
+        if (inicio < fim) {
+
+            // Coloca o pivô na posição correta
+            int posicaoPivo = particionar(vetor, inicio, fim);
+
+            // Ordena a parte da esquerda
+            quickSort(vetor, inicio, posicaoPivo - 1);
+
+            // Ordena a parte da direita
+            quickSort(vetor, posicaoPivo + 1, fim);
+        }
+    }
+
+    public static int particionar(int[] vetor, int inicio, int fim) {
+
+        // Último elemento é o pivô
+        int pivo = vetor[fim];
+
+        // i marca o final da região dos menores
+        int i = inicio - 1;
+
+        // j percorre o vetor procurando valores menores que o pivô
+        for (int j = inicio; j < fim; j++) {
+
+            if (vetor[j] <= pivo) {
+
+                i++;
+
+                // troca vetor[i] com vetor[j]
+                int temp = vetor[i];
+                vetor[i] = vetor[j];
+                vetor[j] = temp;
+            }
+        }
+
+        // Coloca o pivô logo depois da região dos menores
+        int temp = vetor[i + 1];
+        vetor[i + 1] = vetor[fim];
+        vetor[fim] = temp;
+
+        // Retorna a posição final do pivô
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+
+        int[] vetor = {8, 3, 7, 2, 6};
+
+        quickSort(vetor, 0, vetor.length - 1);
+
+        for (int numero : vetor) {
+            System.out.print(numero + " ");
+        }
+    }
+}    
